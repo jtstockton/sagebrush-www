@@ -1,9 +1,7 @@
 site_name: Sagebrush Mesh
 site_url: https://www.sagebrushmesh.com
 site_description: Community documentation for Sagebrush Mesh
-repo_name: GitHub
-repo_url: https://github.com/jtstockton/sagebrush-www
-edit_uri: edit/main/docs/
+edit_uri: https://github.com/jtstockton/sagebrush-www/edit/main/docs/
 
 theme:
   name: material
@@ -36,10 +34,8 @@ theme:
     - search.highlight
     - content.code.copy
     - content.action.edit
-    - content.action.view
 
   icon:
-    repo: fontawesome/brands/github
     edit: material/pencil
 
 markdown_extensions:
@@ -68,17 +64,21 @@ plugins:
   - minify:
       minify_html: true
 
+extra_css:
+  - stylesheets/extra.css
+
 extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/jtstockton/sagebrush-www
       name: GitHub Repository
 
-copyright: >
-  Copyright &copy; 2026 Sagebrush Mesh Contributors -
-  <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+copyright: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
 
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
+  - MeshCore: meshcore.md
+  - Meshtastic: meshtastic.md
   - About: about.md
+  - Contact: contact.md

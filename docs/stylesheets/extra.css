@@ -1,0 +1,71 @@
+/* Sagebrush color palette */
+:root {
+  /* Primary sage green color */
+  --md-primary-fg-color: #a7c7a3;
+  --md-primary-fg-color--light: #c5dcc2;
+  --md-primary-fg-color--dark: #8ab086;
+
+  /* Accent tan/beige color */
+  --md-accent-fg-color: #d2b48c;
+  --md-accent-fg-color--transparent: rgba(210, 180, 140, 0.1);
+
+  /* Dark forest green for headers and important text */
+  --md-typeset-color: #2f3e2e;
+}
+
+/* Light mode specific overrides */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #a7c7a3;
+  --md-primary-fg-color--light: #c5dcc2;
+  --md-primary-fg-color--dark: #8ab086;
+
+  --md-accent-fg-color: #d2b48c;
+  --md-accent-fg-color--transparent: rgba(210, 180, 140, 0.1);
+
+  /* Warm cream background */
+  --md-default-bg-color: #f4f0e6;
+  --md-default-fg-color: #2f3e2e;
+  --md-default-fg-color--light: #6a6a6a;
+
+  /* Code blocks with subtle beige background */
+  --md-code-bg-color: #ebe7dd;
+  --md-code-fg-color: #2f3e2e;
+}
+
+/* Dark mode with earthy tones */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #8ab086;
+  --md-primary-fg-color--light: #a7c7a3;
+  --md-primary-fg-color--dark: #6d9569;
+
+  --md-accent-fg-color: #d2b48c;
+  --md-accent-fg-color--transparent: rgba(210, 180, 140, 0.1);
+
+  /* Dark earthy background instead of pure dark */
+  --md-default-bg-color: #1a1f1a;
+  --md-default-fg-color: #e0ddd3;
+  --md-default-fg-color--light: #a8a8a3;
+
+  /* Code blocks */
+  --md-code-bg-color: #242924;
+  --md-code-fg-color: #e0ddd3;
+}
+
+/* Header gradient inspired by sagebrushmesh.com */
+.md-header {
+  background: linear-gradient(135deg, #d2b48c 0%, #a7c7a3 100%);
+}
+
+/* Footer styling */
+.md-footer {
+  background-color: #a7c7a3;
+}
+
+/* Links in content with sagebrush accent */
+.md-typeset a {
+  color: #8ab086;
+}
+
+.md-typeset a:hover {
+  color: #6d9569;
+}
