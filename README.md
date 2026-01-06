@@ -45,9 +45,15 @@ This site is automatically deployed to Cloudflare Pages when changes are merged 
 
 ### Cloudflare Pages Configuration
 
+**Build settings:**
 - **Build command:** `pip install -r requirements.txt && mkdocs build`
 - **Build output directory:** `site`
 - **Root directory:** `/`
+
+**Environment variables** (set in Cloudflare Pages dashboard):
+- `PYTHON_VERSION` = `3.8` (uses pre-installed Python, much faster than compiling from source)
+
+**Note:** The `runtime.txt` file specifies Python 3.8 to avoid slow builds from compiling Python from source.
 
 ## Project Structure
 
