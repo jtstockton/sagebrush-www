@@ -50,10 +50,7 @@ This site is automatically deployed to Cloudflare Pages when changes are merged 
 - **Build output directory:** `site`
 - **Root directory:** `/`
 
-**Environment variables** (set in Cloudflare Pages dashboard):
-- `PYTHON_VERSION` = `3.8` (uses pre-installed Python, much faster than compiling from source)
-
-**Note:** The `runtime.txt` file specifies Python 3.8 to avoid slow builds from compiling Python from source.
+**Note:** Initial builds may take 3-5 minutes as Cloudflare Pages compiles Python. Subsequent builds with no dependency changes should be faster due to caching.
 
 ## Project Structure
 

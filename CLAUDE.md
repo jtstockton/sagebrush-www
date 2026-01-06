@@ -67,10 +67,12 @@ mkdocs build --strict
 **Cloudflare Pages** automatically builds and deploys from the `main` branch:
 - Build command: `pip install -r requirements.txt && mkdocs build`
 - Build output directory: `site`
-- Environment: Python 3.8 (specified in `runtime.txt` to use pre-installed version)
-- Environment variable: `PYTHON_VERSION=3.8` (avoids slow compilation from source)
+- Environment: Uses Cloudflare's default Python environment
 
-**Build Optimization**: Using Python 3.8 and pinned dependency versions in `requirements.txt` enables faster builds with better caching.
+**Build Performance**:
+- Initial builds: 3-5 minutes (includes Python and dependency installation)
+- Subsequent builds: Faster when dependencies don't change (cached)
+- Pinned versions in `requirements.txt` improve cache hit rates
 
 **GitHub Actions** validates builds on pull requests to catch errors before merge.
 
