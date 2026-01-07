@@ -7,7 +7,7 @@ Join the Sagebrush Mesh community! We use Discord for community discussions, sup
 To help protect our community from bots and spam, please complete the verification below to access the Discord invite link.
 
 <div id="turnstile-container">
-  <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-callback="onTurnstileSuccess"></div>
+  <div class="cf-turnstile" data-sitekey="0x4AAAAAACK9BM1Z30LotBnK" data-callback="onTurnstileSuccess"></div>
 </div>
 
 <div id="discord-link" style="display: none; margin-top: 20px; padding: 15px; background-color: var(--md-code-bg-color); border-radius: 5px;">
