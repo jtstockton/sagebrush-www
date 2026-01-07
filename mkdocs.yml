@@ -80,8 +80,14 @@ copyright: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
-  - MeshCore: meshcore.md
-  - Meshtastic: meshtastic.md
-  - About: about.md
-  - Contributing: contributing.md
-  - Discord: contact.md
+  - MeshCore:
+      - Quick Start: meshcore/mc_quickstart.md
+      - Overview: meshcore/index.md
+  - Meshtastic:
+      - Quick Start: meshtastic/mt_quickstart.md
+      - Overview: meshtastic/index.md
+  - Discord: discord.md
+  - About:
+      - Who are we: who.md
+      - Contributing: contributing.md
+
