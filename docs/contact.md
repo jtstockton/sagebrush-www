@@ -3,9 +3,6 @@ In addition to the mesh, we use Discord for community discussions, support, and 
 
 Whether you need help connecting your node, want to plan router or repeater deployment, or just want to chat—join us!
 
-
-## Join Our Discord
-
 To help protect our community from bots and spam, please complete the verification below to access the Discord invite link.
 
 <div id="turnstile-container">
