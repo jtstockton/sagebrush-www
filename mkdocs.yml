@@ -84,7 +84,10 @@ nav:
       - Quick Start: meshcore/mc_quickstart.md
       - Overview: meshcore/index.md
   - Meshtastic:
-      - Quick Start: meshtastic/mt_quickstart.md
+      - Quick Start:
+          - Overview: meshtastic/mt_quickstart.md
+          - LongFast: meshtastic/longfast.md
+          - MediumFast: meshtastic/mediumfast.md
       - Overview: meshtastic/index.md
   - Discord: discord.md
   - About:
