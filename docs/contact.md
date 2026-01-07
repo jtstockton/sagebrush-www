@@ -22,6 +22,39 @@ To help protect our community from bots and spam, please complete the verificati
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
+// Reset page state when navigating to this page
+function resetPageState() {
+  const turnstileContainer = document.getElementById('turnstile-container');
+  const discordLinkDiv = document.getElementById('discord-link');
+  const errorDiv = document.getElementById('error-message');
+
+  if (turnstileContainer) {
+    turnstileContainer.style.display = 'block';
+  }
+  if (discordLinkDiv) {
+    discordLinkDiv.style.display = 'none';
+  }
+  if (errorDiv) {
+    errorDiv.style.display = 'none';
+  }
+
+  // Reset Turnstile widget
+  const turnstileWidget = document.querySelector('.cf-turnstile');
+  if (turnstileWidget && window.turnstile) {
+    // Remove old widget and create new one
+    const parent = turnstileWidget.parentElement;
+    turnstileWidget.remove();
+    const newWidget = document.createElement('div');
+    newWidget.className = 'cf-turnstile';
+    newWidget.setAttribute('data-sitekey', '0x4AAAAAACK9BM1Z30LotBnK');
+    newWidget.setAttribute('data-callback', 'onTurnstileSuccess');
+    parent.appendChild(newWidget);
+
+    // Render the new widget
+    window.turnstile.render(newWidget);
+  }
+}
+
 async function onTurnstileSuccess(token) {
   const discordLinkDiv = document.getElementById('discord-link');
   const errorDiv = document.getElementById('error-message');
@@ -58,6 +91,14 @@ async function onTurnstileSuccess(token) {
     errorDiv.style.display = 'block';
   }
 }
+
+// Reset state on initial page load
+document.addEventListener('DOMContentLoaded', resetPageState);
+
+// Reset state when navigating back to this page (MkDocs Material instant navigation)
+document$.subscribe(function() {
+  resetPageState();
+});
 </script>
 
 ## Other Ways to Connect
