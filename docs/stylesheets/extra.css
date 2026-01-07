@@ -56,6 +56,13 @@
   background: linear-gradient(135deg, #d2b48c 0%, #a7c7a3 100%);
 }
 
+/* Larger logo size */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 3rem;
+  width: auto;
+}
+
 /* Footer styling */
 .md-footer {
   background-color: #a7c7a3;

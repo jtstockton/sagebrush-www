@@ -5,6 +5,8 @@ edit_uri: https://github.com/jtstockton/sagebrush-www/edit/main/docs/
 
 theme:
   name: material
+  logo: assets/images/logo.png
+  favicon: assets/images/logo.png
   palette:
     # Light mode
     - media: "(prefers-color-scheme: light)"
@@ -81,4 +83,5 @@ nav:
   - MeshCore: meshcore.md
   - Meshtastic: meshtastic.md
   - About: about.md
+  - Contributing: contributing.md
   - Discord: contact.md
