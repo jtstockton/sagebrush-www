@@ -1,6 +1,8 @@
-# Contact Us
 
-Join the Sagebrush Mesh community! We use Discord for community discussions, support, and collaboration.
+In addition to the mesh, we use Discord for community discussions, support, and collaboration. 
+
+Whether you need help connecting your node, want to plan router or repeater deployment, or just want to chat—join us!
+
 
 ## Join Our Discord
 
