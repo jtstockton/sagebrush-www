@@ -1,15 +1,9 @@
 # Getting Started
 
-[Add getting started content here]
+So... you have some new LoRa hardware and don't know where to begin? 
+Below you will find instructions to quickly get up and running on MeshCore or Meshtastic! 
 
-## Prerequisites
 
-[List prerequisites]
+MeshCore Quick Start
 
-## Installation
-
-[Add installation steps]
-
-## Next Steps
-
-[Add next steps]
+Meshtastic Quick Start
