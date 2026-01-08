@@ -1,0 +1,613 @@
+/* ============================================
+   Hero Section - Parallax Full-Screen Landing
+   ============================================ */
+
+/* Hero Section Container - Extends behind header */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Parallax Background Image */
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120vh;
+  background-image: url('/assets/images/landscape1.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transform: translateZ(0);
+  will-change: transform;
+  z-index: -1;  /* Behind everything */
+}
+
+/* Dark mode - use landscape2 */
+[data-md-color-scheme="slate"] .hero-background {
+  background-image: url('/assets/images/landscape2.png');
+  filter: brightness(0.7);
+}
+
+/* Gradient Overlay - Fades to Content */
+.hero-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(
+    to bottom,
+    rgba(244, 240, 230, 0) 0%,
+    rgba(244, 240, 230, 0.3) 30%,
+    rgba(244, 240, 230, 0.7) 60%,
+    rgba(244, 240, 230, 0.95) 85%,
+    rgba(244, 240, 230, 1) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Dark mode gradient */
+[data-md-color-scheme="slate"] .hero-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgba(26, 31, 26, 0) 0%,
+    rgba(26, 31, 26, 0.3) 30%,
+    rgba(26, 31, 26, 0.7) 60%,
+    rgba(26, 31, 26, 0.95) 85%,
+    rgba(26, 31, 26, 1) 100%
+  );
+}
+
+/* Hero Content */
+.hero-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;  /* Let clicks pass through to background */
+}
+
+.hero-content * {
+  pointer-events: auto;  /* But enable clicks on actual content */
+}
+
+/* Hero text container */
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Primary title - centered, slides up and fades */
+.hero-title--primary {
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
+  text-align: center;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  will-change: opacity, transform;
+  z-index: 2;
+}
+
+/* Secondary title - positioned below header, appears early */
+.hero-title--secondary {
+  position: absolute;
+  top: 60vh;  /* Position lower in viewport */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(1.5rem, 3.5vw, 3rem);
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.3;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+  text-align: center;
+  white-space: nowrap;
+  transition: opacity 0.4s ease;
+  opacity: 0;
+  z-index: 10;
+  padding: 0 2rem;
+  pointer-events: none;
+}
+
+[data-md-color-scheme="slate"] .hero-title--primary,
+[data-md-color-scheme="slate"] .hero-title--secondary {
+  color: #ffffff;
+  text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.95);
+}
+
+/* Remove unused button styles */
+
+/* Scroll Indicator */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: bounce 2s infinite;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.hero-scroll-indicator:hover {
+  opacity: 1;
+}
+
+.scroll-text {
+  font-size: 0.875rem;
+  color: var(--md-typeset-color);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+[data-md-color-scheme="slate"] .scroll-text {
+  color: var(--md-default-fg-color);
+}
+
+.scroll-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--md-primary-fg-color);
+}
+
+/* Base header should always be fixed */
+.md-header {
+  position: fixed !important;
+  top: 0 !important;
+  z-index: 100 !important;
+}
+
+/* Ensure header stays transparent when hero section exists and scrolled class is not applied */
+.hero-section ~ .content-section .md-header:not(.md-header--scrolled),
+body:has(.hero-section) .md-header:not(.md-header--scrolled) {
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+/* Transparent Header - Always visible and sticky */
+.md-header--transparent {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  transition: none !important; /* Remove transition to prevent flicker */
+  z-index: 100 !important;
+}
+
+/* Header on hero page should start transparent immediately */
+body:has(.hero-section) .md-header {
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  transition: none !important; /* No transition on hero page */
+}
+
+/* Header title on hero page should fade smoothly */
+body:has(.hero-section) .md-header__title {
+  transition: opacity 0.4s ease, visibility 0.4s ease !important;
+}
+
+[data-md-color-scheme="slate"] .md-header--transparent {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+.md-header--transparent .md-header__inner {
+  color: var(--md-typeset-color);
+}
+
+.md-header--transparent .md-logo img,
+.md-header--transparent .md-logo svg {
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+[data-md-color-scheme="slate"] .md-header--transparent .md-header__inner {
+  color: var(--md-default-fg-color);
+}
+
+.md-header--transparent .md-header__title,
+.md-header--transparent .md-header__button,
+.md-header--transparent .md-header__ellipsis,
+.md-header--transparent .md-ellipsis,
+.md-header--transparent .md-header__topic {
+  color: #ffffff !important;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-md-color-scheme="slate"] .md-header--transparent .md-header__title,
+[data-md-color-scheme="slate"] .md-header--transparent .md-header__button,
+[data-md-color-scheme="slate"] .md-header--transparent .md-header__ellipsis,
+[data-md-color-scheme="slate"] .md-header--transparent .md-ellipsis,
+[data-md-color-scheme="slate"] .md-header--transparent .md-header__topic {
+  color: #ffffff !important;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Make header icons visible with shadow */
+.md-header--transparent .md-icon svg {
+  filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.6));
+  fill: #ffffff !important;
+}
+
+.md-header--transparent .md-icon {
+  color: #ffffff !important;
+}
+
+/* Search bar styling on transparent header */
+.md-header--transparent .md-search__input {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+}
+
+.md-header--transparent .md-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+[data-md-color-scheme="slate"] .md-header--transparent .md-search__input {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+/* Header becomes solid on scroll - after hero section */
+.md-header--scrolled {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  background: linear-gradient(135deg, #d2b48c 0%, #a7c7a3 100%) !important;
+  background-image: linear-gradient(135deg, #d2b48c 0%, #a7c7a3 100%) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  transition: background 0.3s ease, box-shadow 0.3s ease !important; /* Smooth transition when appearing */
+  z-index: 100 !important;
+}
+
+.md-header--scrolled .md-header__title,
+.md-header--scrolled .md-header__button,
+.md-header--scrolled .md-header__ellipsis,
+.md-header--scrolled .md-ellipsis,
+.md-header--scrolled .md-header__topic {
+  color: var(--md-typeset-color) !important;
+  text-shadow: none !important;
+}
+
+.md-header--scrolled .md-icon svg {
+  fill: var(--md-typeset-color) !important;
+  filter: none !important;
+}
+
+.md-header--scrolled .md-icon {
+  color: var(--md-typeset-color) !important;
+}
+
+[data-md-color-scheme="slate"] .md-header--scrolled {
+  background: #1a1f1a !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-md-color-scheme="slate"] .md-header--scrolled .md-header__title,
+[data-md-color-scheme="slate"] .md-header--scrolled .md-header__button,
+[data-md-color-scheme="slate"] .md-header--scrolled .md-icon {
+  color: var(--md-default-fg-color) !important;
+}
+
+/* Tabs - Default gradient on normal pages */
+.md-tabs {
+  position: fixed !important;
+  top: var(--md-header-height, 3.6rem) !important;
+  left: 0 !important;
+  right: 0 !important;
+  background: linear-gradient(135deg, #d2b48c 0%, #a7c7a3 100%) !important;
+  opacity: 1;
+  transition: opacity 0.4s ease !important;
+  z-index: 90 !important;
+}
+
+/* Tabs on hero page - never show gradient, always transparent */
+.md-tabs--hero,
+.md-tabs--hero.md-tabs,
+body:has(.hero-section) .md-tabs,
+.hero-section ~ .content-section .md-tabs {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  transition: opacity 0.4s ease !important; /* Only transition opacity, not background */
+}
+
+/* When tabs are hidden on hero page, completely remove from view */
+.md-tabs--hero.md-tabs--hidden,
+body:has(.hero-section) .md-tabs--hidden {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+[data-md-color-scheme="slate"] .md-tabs--hero,
+[data-md-color-scheme="slate"] body:has(.hero-section) .md-tabs,
+[data-md-color-scheme="slate"] .hero-section ~ .content-section .md-tabs {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Make tabs text visible on hero page with shadows */
+.hero-section ~ .content-section .md-tabs__link,
+body:has(.hero-section) .md-tabs__link {
+  color: #ffffff !important;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6) !important;
+  opacity: 1 !important;
+  font-weight: 500 !important;
+  pointer-events: auto !important;  /* Ensure links are clickable */
+}
+
+.md-tabs__link:hover {
+  color: #ffffff !important;
+  opacity: 0.9 !important;
+}
+
+[data-md-color-scheme="slate"] .md-tabs__link {
+  color: #ffffff !important;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+.md-tabs__link--active {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8) !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6) !important;
+}
+
+[data-md-color-scheme="slate"] .md-tabs__link--active {
+  color: #ffffff !important;
+}
+
+/* Make sure tabs list is visible and clickable */
+.md-tabs__list {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.md-tabs__item {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Tabs fading state */
+.md-tabs--fading {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.md-tabs--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Content Section */
+.content-section {
+  position: relative;
+  z-index: 3;
+  background-color: var(--md-default-bg-color);
+  min-height: 100vh;
+  padding: 4rem 0;
+  margin-top: 0;
+}
+
+/* Ensure hero starts at top of page */
+body .md-container {
+  padding-top: 0;
+}
+
+/* Home page specific adjustments */
+.md-main {
+  margin-top: 0;
+}
+
+.md-main__inner {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.content-inner {
+  animation: fadeIn 1s ease-out;
+}
+
+.content-inner h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  color: var(--md-typeset-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.content-inner p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--md-default-fg-color);
+  margin-bottom: 3rem;
+  text-align: center;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Feature Grid */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.feature-card {
+  background: var(--md-code-bg-color);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.5rem;
+  fill: var(--md-primary-fg-color);
+}
+
+.feature-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--md-primary-fg-color);
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  color: var(--md-typeset-color);
+  margin-bottom: 1rem;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: var(--md-default-fg-color--light);
+  margin: 0;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 960px) {
+  .hero-content {
+    padding: 0 1.5rem;
+  }
+
+  .hero-title--primary {
+    font-size: clamp(1.75rem, 5vw, 3rem);
+    white-space: normal;  /* Allow wrapping on small screens */
+  }
+
+  .hero-title--secondary {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    white-space: normal;
+    top: 60vh;  /* Lower on tablets */
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-section {
+    min-height: 500px;
+  }
+
+  .hero-title--primary {
+    font-size: clamp(1.5rem, 7vw, 2.25rem);
+  }
+
+  .hero-title--secondary {
+    font-size: clamp(1.1rem, 5vw, 1.75rem);
+    top: 60vh;  /* Lower on mobile */
+  }
+
+  .content-section {
+    padding: 2rem 0;
+  }
+}
+
+/* Disable parallax on mobile for better performance */
+@media (max-width: 768px) {
+  .hero-background {
+    background-attachment: scroll;
+    height: 100vh;
+  }
+}

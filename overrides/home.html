@@ -1,0 +1,166 @@
+{% extends "main.html" %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ 'assets/stylesheets/hero.css' | url }}">
+  <style>
+    /* Remove default spacing to allow hero to extend to top */
+    .md-main__inner { margin-top: 0; padding-top: 0; }
+    .md-content { display: block; }
+    .md-sidebar { display: none; }
+  </style>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ 'assets/javascripts/hero.js' | url }}"></script>
+{% endblock %}
+
+{% block header %}
+  <!-- Override to make header transparent initially -->
+  <header class="md-header md-header--transparent" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="{{ lang.t('header') }}">
+      <a href="{{ config.site_url | default(nav.homepage.url, true) | url }}" title="{{ config.site_name }}" class="md-header__button md-logo" aria-label="{{ config.site_name }}" data-md-component="logo">
+        {% include "partials/logo.html" %}
+      </a>
+      <label class="md-header__button md-icon" for="__drawer">
+        {% set icon = config.theme.icon.menu or "material/menu" %}
+        {% include ".icons/" ~ icon ~ ".svg" %}
+      </label>
+      <div class="md-header__title" data-md-component="header-title">
+        <div class="md-header__ellipsis">
+          <div class="md-header__topic">
+            <span class="md-ellipsis">
+              {{ config.site_name }}
+            </span>
+          </div>
+        </div>
+      </div>
+      {% if config.theme.palette %}
+        <form class="md-header__option" data-md-component="palette">
+          {% for option in config.theme.palette %}
+            {% set scheme = option.scheme | d("default", true) %}
+            <input class="md-option" data-md-color-media="{{ option.media }}" data-md-color-scheme="{{ scheme | replace(' ', '-') }}" data-md-color-primary="{{ option.primary | replace(' ', '-') }}" data-md-color-accent="{{ option.accent | replace(' ', '-') }}" {% if option.toggle %} aria-label="{{ option.toggle.name }}" {% else %} aria-hidden="true" {% endif %} type="radio" name="__palette" id="__palette_{{ loop.index }}">
+            {% if option.toggle %}
+              <label class="md-header__button md-icon" title="{{ option.toggle.name }}" for="__palette_{{ loop.index0 or loop.length }}" hidden>
+                {% set icon = option.toggle.icon | d("material/brightness-auto") %}
+                {% include ".icons/" ~ icon ~ ".svg" %}
+              </label>
+            {% endif %}
+          {% endfor %}
+        </form>
+      {% endif %}
+      {% if config.extra.alternate %}
+        <div class="md-header__option">
+          <div class="md-select">
+            {% set icon = config.theme.icon.alternate or "material/translate" %}
+            <button class="md-header__button md-icon" aria-label="{{ lang.t('select.language') }}">
+              {% include ".icons/" ~ icon ~ ".svg" %}
+            </button>
+            <div class="md-select__inner">
+              <ul class="md-select__list">
+                {% for alt in config.extra.alternate %}
+                  <li class="md-select__item">
+                    <a href="{{ alt.link | url }}" hreflang="{{ alt.lang }}" class="md-select__link">
+                      {{ alt.name }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      {% if "material/search" in config.plugins %}
+        <label class="md-header__button md-icon" for="__search">
+          {% set icon = config.theme.icon.search or "material/magnify" %}
+          {% include ".icons/" ~ icon ~ ".svg" %}
+        </label>
+        {% include "partials/search.html" %}
+      {% endif %}
+      {% if config.repo_url %}
+        <div class="md-header__source">
+          {% include "partials/source.html" %}
+        </div>
+      {% endif %}
+    </nav>
+  </header>
+{% endblock %}
+
+{% block tabs %}
+  {{ super() }}
+
+  <!-- Hero Section with Full-Screen Parallax Background -->
+  <section class="hero-section" id="heroSection">
+    <div class="hero-background"></div>
+    <div class="hero-gradient"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title hero-title--primary" id="heroTitle1">Welcome to Sagebrush Mesh</h1>
+      </div>
+      <h1 class="hero-title hero-title--secondary" id="heroTitle2">Eastern Washington's Premier Mesh Community</h1>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span class="scroll-text">Scroll to explore</span>
+      <svg class="scroll-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="content-section">
+    <div class="md-grid md-typeset content-wrapper">
+      <div class="content-inner">
+        {% if page.meta and page.meta.hero_content %}
+          {{ page.meta.hero_content }}
+        {% else %}
+          <h2>What is Sagebrush Mesh?</h2>
+          <p>
+            We're a community of Meshtastic users working together to build a robust mesh radio network
+            across Eastern Washington. Whether you're in the Palouse hills, Yakima Valley, Columbia Basin,
+            or up near the Canadian border, we're laying the groundwork for reliable off-grid communication —
+            with coverage stretching into Oregon, Idaho, and even parts of British Columbia.
+          </p>
+
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8M12,10A2,2 0 0,0 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12A2,2 0 0,0 12,10Z"/>
+                </svg>
+              </div>
+              <h3>Wide Coverage</h3>
+              <p>Mesh network spanning Eastern Washington and beyond</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M12,2A2,2 0 0,1 14,4C14,4.74 13.6,5.39 13,5.73V7H14A7,7 0 0,1 21,14H22A1,1 0 0,1 23,15V18A1,1 0 0,1 22,19H21V20A2,2 0 0,1 19,22H5A2,2 0 0,1 3,20V19H2A1,1 0 0,1 1,18V15A1,1 0 0,1 2,14H3A7,7 0 0,1 10,7H11V5.73C10.4,5.39 10,4.74 10,4A2,2 0 0,1 12,2M7.5,13A2.5,2.5 0 0,0 5,15.5A2.5,2.5 0 0,0 7.5,18A2.5,2.5 0 0,0 10,15.5A2.5,2.5 0 0,0 7.5,13M16.5,13A2.5,2.5 0 0,0 14,15.5A2.5,2.5 0 0,0 16.5,18A2.5,2.5 0 0,0 19,15.5A2.5,2.5 0 0,0 16.5,13Z"/>
+                </svg>
+              </div>
+              <h3>Off-Grid Ready</h3>
+              <p>Communication that works when traditional networks don't</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M16,13C15.71,13 15.38,13 15.03,13.05C16.19,13.89 17,15 17,16.5V19H23V16.5C23,14.17 18.33,13 16,13M8,13C5.67,13 1,14.17 1,16.5V19H15V16.5C15,14.17 10.33,13 8,13M8,11A3,3 0 0,0 11,8A3,3 0 0,0 8,5A3,3 0 0,0 5,8A3,3 0 0,0 8,11M16,11A3,3 0 0,0 19,8A3,3 0 0,0 16,5A3,3 0 0,0 13,8A3,3 0 0,0 16,11Z"/>
+                </svg>
+              </div>
+              <h3>Community Driven</h3>
+              <p>Built by enthusiasts, for everyone</p>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block content %}{% endblock %}
+{% block footer %}
+  {{ super() }}
+{% endblock %}
