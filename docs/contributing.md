@@ -136,7 +136,7 @@ When documenting technical topics:
 
 If you have questions about contributing:
 
-- Join our [Discord](contact.md) community
+- Join our [Discord](discord.md) community
 - Open a [GitHub Discussion](https://github.com/jtstockton/sagebrush-www/discussions)
 - Check existing [Issues](https://github.com/jtstockton/sagebrush-www/issues) for similar questions
 
