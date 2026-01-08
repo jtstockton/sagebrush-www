@@ -11,7 +11,14 @@
     /* Remove default spacing to allow hero to extend to top */
     .md-main__inner { margin-top: 0; padding-top: 0; }
     .md-content { display: block; }
-    .md-sidebar { display: none; }
+    /* Only hide secondary sidebar (table of contents), keep primary sidebar (navigation drawer) */
+    .md-sidebar--secondary { display: none; }
+    /* Hide any leftover sidebar elements on desktop */
+    .md-sidebar--primary { display: none; }
+    @media screen and (max-width: 76.1875em) {
+      /* Show sidebar on mobile/tablet for hamburger menu */
+      .md-sidebar--primary { display: block; }
+    }
   </style>
 {% endblock %}
 
