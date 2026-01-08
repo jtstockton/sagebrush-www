@@ -1,6 +1,9 @@
 /**
  * Hero Section - Parallax and Scroll Effects
  * Handles transparent header, parallax scrolling, and smooth transitions
+ *
+ * CONFIGURATION GUIDE: See docs/HERO_PAGE_CONFIG.md for comprehensive documentation
+ * including timing adjustments, positioning, and troubleshooting.
  */
 
 (function() {
@@ -114,10 +117,10 @@
         }
       }
 
-      // Fade out tabs and header title in sync with title 2 (60-80%)
+      // Fade out tabs and header title quickly as title 1 starts moving
       if (tabs) {
-        const tabsFadeStart = heroHeight * 0.60;  // Start fading at 60% (with title 2)
-        const tabsFadeEnd = heroHeight * 0.80;    // Complete fade by 80%
+        const tabsFadeStart = 0;  // Start fading immediately on any scroll
+        const tabsFadeEnd = heroHeight * 0.125;    // Complete fade by 12.5% (halfway point of title 1's journey)
 
         if (scrolled >= tabsFadeStart) {
           const fadeProgress = (scrolled - tabsFadeStart) / (tabsFadeEnd - tabsFadeStart);
