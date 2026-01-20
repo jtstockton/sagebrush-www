@@ -52,8 +52,14 @@
 }
 
 /* Header gradient inspired by sagebrushmesh.com */
-.md-header {
-  background: linear-gradient(135deg, #d2b48c 0%, #a7c7a3 100%);
+/* Only apply to non-transparent headers (not on home page) */
+.md-header:not(.md-header--transparent) {
+  background: linear-gradient(135deg, #d2b48c 0%, #a7c7a3 100%) !important;
+}
+
+/* Ensure header stays consistent on non-hero pages at any scroll position */
+body:not(:has(.hero-section)) .md-header {
+  background: linear-gradient(135deg, #d2b48c 0%, #a7c7a3 100%) !important;
 }
 
 /* Larger logo size */
